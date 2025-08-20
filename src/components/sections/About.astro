@@ -1,0 +1,63 @@
+---
+import { ChevronDown } from "lucide-react";
+import SplitText from "../SplitText";
+---
+
+<section
+  id="about"
+  class="min-h-screen flex flex-col justify-center items-center relative px-2 sm:px-4 md:px-8 bg-primary-2"
+>
+  <div class="max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <SplitText
+          client:visible
+          text="About Me"
+          className="text-8xl font-semibold text-center"
+          delay={100}
+          duration={2}
+          ease="elastic.out(1,0.3)"
+          splitType="chars"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.1}
+          rootMargin="-10px"
+          splitType="lines"
+          textAlign="left"
+        />
+        <div class="space-y-6 text-lg leading-relaxed text-stone-700">
+          <p>
+            With fifteen years cultivating enterprise-grade software systems, I
+            specialize in architecting scalable solutions that marry
+            computational excellence with refined user experience.
+          </p>
+          <p>
+            My practice focuses on distributed systems, advanced algorithms, and
+            performance optimization—bringing the precision of classical
+            engineering principles to modern software architecture.
+          </p>
+          <p>
+            I collaborate exclusively with forward-thinking organizations that
+            understand the value of thoughtful engineering and appreciate the
+            distinction between merely functional code and truly elegant
+            systems.
+          </p>
+        </div>
+      </div>
+      <div class="relative">
+        <div
+          class="aspect-square bg-stone-200 rounded-sm overflow-hidden group-hover:shadow-2xl transition-all duration-500"
+        >
+          <div
+            class="w-full h-full bg-gradient-to-br from-stone-800 to-stone-900 flex items-center justify-center text-stone-100"
+          >
+            <div class="text-center">
+              <div class="text-4xl font-mono mb-2">~/</div>
+              <div class="text-xs tracking-widest opacity-75">SYSTEMS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

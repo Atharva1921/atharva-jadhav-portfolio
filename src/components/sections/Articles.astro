@@ -1,0 +1,131 @@
+---
+// Blog.astro
+import Parser from "rss-parser";
+import BlogContainer from "../BlogContainer";
+import SplitText from "../SplitText";
+
+const parser = new Parser();
+const feed = await parser.parseURL("https://medium.com/feed/@atharvajadhav10");
+
+function estimateReadingTime(content: string) {
+  const text = content.replace(/<[^>]*>/g, "");
+  const wordsPerMinute = 150;
+  const wordCount = text.split(/\s+/).length;
+  const readingTime = Math.ceil(wordCount / wordsPerMinute);
+  return `${readingTime} min read`;
+}
+
+// Function to extract excerpt from content
+function extractExcerpt(content: string, maxLength = 150) {
+  const text = content.replace(/<[^>]*>/g, "").trim();
+  return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
+}
+
+function formatDate(dateString: string | undefined) {
+  if (!dateString) return undefined;
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function extractCategory(categories: string[] | undefined) {
+  if (categories && categories.length > 0) {
+    return categories[0];
+  }
+  return "Technology";
+}
+
+export function extractThumbnail(content: string): string | null {
+  if (!content) return null;
+  const match = content.match(/<img[^>]+src=["']([^"']+)["']/i);
+  return match ? match[1] : null;
+}
+
+const categoryColors = [
+  "from-blue-500/20 to-purple-600/20",
+  "from-green-500/20 to-teal-600/20",
+  "from-orange-500/20 to-red-600/20",
+  "from-purple-500/20 to-pink-600/20",
+  "from-indigo-500/20 to-blue-600/20",
+  "from-emerald-500/20 to-cyan-600/20",
+  "from-gray-500/20 to-slate-600/20",
+];
+
+const articles = feed.items.slice(0, 6).map((item) => ({
+  title: item.title,
+  link: item.link,
+  category: extractCategory(item.categories),
+  publishDate: formatDate(item.pubDate),
+  categories: item.categories,
+  content: item["content:encoded"],
+  thumbnail: extractThumbnail(item["content:encoded"]),
+  colorScheme:
+    categoryColors[Math.floor(Math.random() * categoryColors.length)],
+  excerpt: extractExcerpt(item["content:encoded"]),
+  readingTime: estimateReadingTime(item["content:encoded"]),
+}));
+---
+
+<section
+  id="articles"
+  class="min-h-screen flex flex-col justify-center items-center relative px-4 md:px-8 bg-primary-2"
+>
+  <div class="max-w-7xl mx-auto w-full">
+    <!-- Section Header -->
+    <div class="text-center">
+      <SplitText
+        client:visible
+        text="Latest Articles"
+        className="text-6xl font-semibold text-center"
+        delay={100}
+        duration={2}
+        ease="elastic.out(1,0.3)"
+        splitType="chars"
+        from={{ opacity: 0, y: 40 }}
+        to={{ opacity: 1, y: 0 }}
+        threshold={0.1}
+        rootMargin="-10px"
+        splitType="lines"
+        textAlign="left"
+      />
+      <div class="w-12 h-px bg-gray-400 mx-auto mb-6"></div>
+      <p
+        class="text-gray-600 text-lg font-light max-w-xl mx-auto leading-relaxed"
+      >
+        Thoughts and insights on technology, development, and design
+      </p>
+    </div>
+
+    <BlogContainer articles={articles} client:visible />
+
+    <!-- View All Articles -->
+    <div class="text-center">
+      <p class="text-gray-500 text-sm font-light tracking-wide uppercase mb-4">
+        More insights available
+      </p>
+      <a
+        href="https://medium.com/@atharvajadhav10"
+        target="_blank"
+        class="inline-flex items-center px-8 py-3 border border-gray-900 text-gray-900 font-medium tracking-wide hover:bg-gray-900 hover:text-white transition-all duration-300"
+      >
+        View all articles on Medium
+        <svg
+          class="w-4 h-4 ml-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+          ></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

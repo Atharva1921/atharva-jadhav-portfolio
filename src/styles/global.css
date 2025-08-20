@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: oklch(0.2392 0.0193 195.94);
+  --color-primary-2: oklch(0.9727 0.0177 92.68);
+  --color-primary-3: oklch(1 0 0);
+  
+  --color-secondary: oklch(0.68 0.08 79);
+
+  --color-symbol-500: oklch(0.7467 0.0615 79.26);
+  --color-symbol-400: oklch(0.68 0.0486 83.18);
+  --color-symbol-300: oklch(0.65 0.0486 83.18);
+  --color-symbol-200: oklch(0.6 0.0486 83.18);
+  --color-symbol-100: oklch(0.56 0.0486 83.18);
+}
