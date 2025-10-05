@@ -1,75 +1,73 @@
 import { useState } from "react";
-import type { ExperienceData, ExperienceNode } from "./ExperienceSection";
-import { ChevronRight, ChevronDown, FileText, Folder } from "lucide-react";
+import { ChevronDown, ChevronRight, Folders, File } from "lucide-react";
+import type { ExperienceData, ExperienceNode } from "@/types/types";
 
-type FileTreeProps = {
-	data: ExperienceData[];
-	selectedProject: ExperienceNode | null;
-	setSelectedProject: (project: ExperienceNode | null) => void;
-};
-
-const FileTree = ({
+export const FileTree = ({
 	data,
-	selectedProject,
 	setSelectedProject,
-}: FileTreeProps) => {
-	const [expandedFolders, setExpandedFolders] = useState(() =>
-		data.map((item) => item.id),
+	selectedProject,
+}: {
+	data: ExperienceData[];
+	setSelectedProject: (project: ExperienceNode) => void;
+	selectedProject: ExperienceNode | null;
+}) => {
+	const [expandedFolders, setExpandedFolders] = useState<Set<string>>(
+		new Set(["2023-present"]),
 	);
 
 	const toggleFolder = (folderId: string) => {
-		setExpandedFolders((prev) =>
-			prev.includes(folderId)
-				? prev.filter((id) => id !== folderId)
-				: [...prev, folderId],
-		);
+		const newExpanded = new Set(expandedFolders);
+		if (newExpanded.has(folderId)) {
+			newExpanded.delete(folderId);
+		} else {
+			newExpanded.add(folderId);
+		}
+		setExpandedFolders(newExpanded);
 	};
 
 	return (
-		<div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background ">
-			{data.map(
-				(item) =>
-					item.type === "folder" && (
-						<div className="select-none w-full" key={item.id}>
-							<button
-								className="flex items-center py-2 px-3 hover:bg-gray-100 cursor-pointer rounded-md transition-colors duration-200 w-full"
-								onClick={() => toggleFolder(item.id)}
-								type="button"
-							>
-								{expandedFolders.includes(item.id) ? (
-									<ChevronDown className="w-4 h-4 mr-2 text-gray-600" />
-								) : (
-									<ChevronRight className="w-4 h-4 mr-2 text-gray-600" />
-								)}
-								<Folder className="w-4 h-4 mr-2 text-primary" />
-								<span className="text-primary font-medium">{item.label}</span>
-							</button>
-							{expandedFolders.includes(item.id) &&
-								item.children?.map((child) => (
-									<div
-										key={child.id}
-										className="ml-4 border-l border-gray-200 pl-2 "
+		<div className="text-sm">
+			{data.map((folder) => (
+				<div key={folder.id}>
+					<button
+						type="button"
+						className="flex items-center py-1 px-2 hover:bg-gray-100 cursor-pointer rounded"
+						onClick={() => toggleFolder(folder.id)}
+					>
+						{expandedFolders.has(folder.id) ? (
+							<ChevronDown className="w-4 h-4 mr-1 text-gray-600" />
+						) : (
+							<ChevronRight className="w-4 h-4 mr-1 text-gray-600" />
+						)}
+						<Folders className="w-4 h-4 mr-2 text-blue-600" />
+						<span className="text-gray-800">{folder.label}</span>
+					</button>
+
+					{expandedFolders.has(folder.id) && folder.children && (
+						<div className="ml-6">
+							{folder.children.map((file) => (
+								<button
+									type="button"
+									key={file.id}
+									className={`flex items-center py-1 px-2 hover:bg-gray-100 cursor-pointer rounded ${
+										selectedProject?.id === file.id ? "bg-blue-100" : ""
+									}`}
+									onClick={() => setSelectedProject(file)}
+								>
+									<File className="w-4 h-4 mr-2 text-gray-600" />
+									<span
+										className={`text-gray-800 ${
+											selectedProject?.id === file.id ? "font-medium" : ""
+										}`}
 									>
-										<button
-											className={`flex items-center justify-start py-2 px-2 hover:bg-gray-100 cursor-pointer rounded-md transition-colors duration-200 w-full ${
-												selectedProject?.id === child.id &&
-												"bg-primary/30 border-l-2 border-primary hover:bg-primary/30"
-											}`}
-											onClick={() => setSelectedProject(child)}
-											type="button"
-										>
-											<FileText className="min-w-4 min-h-4 size-4 mr-2 text-gray-500 " />
-											<span className="text-gray-700 truncate ">
-												{child.label}
-											</span>
-										</button>
-									</div>
-								))}
+										{file.label}
+									</span>
+								</button>
+							))}
 						</div>
-					),
-			)}
+					)}
+				</div>
+			))}
 		</div>
 	);
 };
-
-export default FileTree;

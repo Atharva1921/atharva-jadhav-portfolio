@@ -1,42 +1,49 @@
 ---
-import { ChevronDown } from "lucide-react";
 import SplitText from "../SplitText";
 ---
 
 <section
   id="about"
-  class="min-h-screen flex flex-col justify-center items-center relative px-2 sm:px-4 md:px-8 bg-primary-2"
+  class="min-h-screen flex flex-col justify-center items-center relative px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-primary-2 py-8 sm:py-12 md:py-16"
 >
-  <div class="max-w-7xl mx-auto">
-    <div class="grid md:grid-cols-2 gap-16 items-center">
-      <div>
-        <SplitText
-          client:visible
-          text="About Me"
-          className="text-8xl font-semibold text-center"
-          delay={100}
-          duration={2}
-          ease="elastic.out(1,0.3)"
-          splitType="chars"
-          from={{ opacity: 0, y: 40 }}
-          to={{ opacity: 1, y: 0 }}
-          threshold={0.1}
-          rootMargin="-10px"
-          splitType="lines"
-          textAlign="left"
-        />
-        <div class="space-y-6 text-lg leading-relaxed text-stone-700">
-          <p>
+  <div class="w-full max-w-7xl mx-auto">
+    <div
+      class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-20 xl:gap-24 items-center"
+    >
+      <!-- Content Section -->
+      <div class="order-2 lg:order-1">
+        <div class="mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+          <SplitText
+            client:visible
+            text="About Me"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold text-center lg:text-left"
+            delay={100}
+            duration={2}
+            ease="elastic.out(1,0.3)"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-10px"
+            splitType="lines"
+            textAlign="left"
+          />
+        </div>
+
+        <div
+          class="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-7 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-stone-700 max-w-none lg:max-w-2xl"
+        >
+          <p class="text-center lg:text-left">
             With fifteen years cultivating enterprise-grade software systems, I
             specialize in architecting scalable solutions that marry
             computational excellence with refined user experience.
           </p>
-          <p>
+          <p class="text-center lg:text-left">
             My practice focuses on distributed systems, advanced algorithms, and
             performance optimization—bringing the precision of classical
             engineering principles to modern software architecture.
           </p>
-          <p>
+          <p class="text-center lg:text-left">
             I collaborate exclusively with forward-thinking organizations that
             understand the value of thoughtful engineering and appreciate the
             distinction between merely functional code and truly elegant
@@ -44,20 +51,74 @@ import SplitText from "../SplitText";
           </p>
         </div>
       </div>
-      <div class="relative">
-        <div
-          class="aspect-square bg-stone-200 rounded-sm overflow-hidden group-hover:shadow-2xl transition-all duration-500"
-        >
+
+      <!-- Visual Section -->
+      <div
+        class="order-1 lg:order-2 relative w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-none mx-auto lg:mx-0"
+      >
+        <div class="relative group">
           <div
-            class="w-full h-full bg-gradient-to-br from-stone-800 to-stone-900 flex items-center justify-center text-stone-100"
+            class="aspect-square bg-stone-200 rounded-sm overflow-hidden group-hover:shadow-2xl transition-all duration-500 transform group-hover:scale-105"
           >
-            <div class="text-center">
-              <div class="text-4xl font-mono mb-2">~/</div>
-              <div class="text-xs tracking-widest opacity-75">SYSTEMS</div>
+            <div
+              class="w-full h-full bg-gradient-to-br from-stone-800 to-stone-900 flex items-center justify-center text-stone-100 relative"
+            >
+              <div class="text-center">
+                <div
+                  class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-mono mb-2 sm:mb-3 md:mb-4"
+                >
+                  ~/
+                </div>
+                <div
+                  class="text-xs sm:text-sm md:text-base tracking-widest opacity-75"
+                >
+                  SYSTEMS
+                </div>
+              </div>
+
+              <!-- Subtle floating elements for larger screens -->
+              <div class="absolute inset-0 pointer-events-none">
+                <div
+                  class="hidden sm:block absolute top-4 left-4 w-1 h-1 bg-stone-400/30 rounded-full animate-pulse"
+                >
+                </div>
+                <div
+                  class="hidden sm:block absolute bottom-4 right-4 w-1 h-1 bg-stone-400/30 rounded-full animate-pulse"
+                  style="animation-delay: 1s;"
+                >
+                </div>
+                <div
+                  class="hidden md:block absolute top-1/2 left-4 w-0.5 h-0.5 bg-stone-400/20 rounded-full animate-pulse"
+                  style="animation-delay: 2s;"
+                >
+                </div>
+                <div
+                  class="hidden md:block absolute top-4 right-1/2 w-0.5 h-0.5 bg-stone-400/20 rounded-full animate-pulse"
+                  style="animation-delay: 3s;"
+                >
+                </div>
+              </div>
             </div>
           </div>
+
+          <!-- Decorative corner elements for larger screens -->
+          <div
+            class="hidden lg:block absolute -top-2 -left-2 w-4 h-4 border-l-2 border-t-2 border-stone-400/30"
+          >
+          </div>
+          <div
+            class="hidden lg:block absolute -bottom-2 -right-2 w-4 h-4 border-r-2 border-b-2 border-stone-400/30"
+          >
+          </div>
+        </div>
+
+        <!-- Background decoration for larger screens -->
+        <div
+          class="hidden xl:block absolute -inset-4 bg-gradient-to-br from-stone-300/10 to-transparent rounded-lg -z-10"
+        >
         </div>
       </div>
     </div>
+
   </div>
 </section>

@@ -6,90 +6,205 @@ import Magnet from "../Magnet";
 
 <section
   id="hero"
-  class="min-h-screen flex flex-col justify-center items-center relative px-2 sm:px-4 md:px-8 bg-primary"
+  class="min-h-screen flex flex-col justify-center items-center relative px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-primary overflow-hidden"
 >
-  <div class="text-center transition-all duration-1000 relative z-10 translate-y-0 opacity-100 flex flex-col items-center">
-    <div class="relative mb-4 md:mb-8 w-fit">
-      <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium mb-6 tracking-wider relative">
+  <div
+    class="text-center transition-all duration-1000 relative z-10 translate-y-0 opacity-100 flex flex-col items-center w-full max-w-7xl mx-auto"
+  >
+    <div class="relative mb-4 sm:mb-6 md:mb-8 lg:mb-10 w-fit">
+      <h1
+        class="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-10xl font-medium mb-4 sm:mb-6 md:mb-8 tracking-wider relative"
+      >
         <div class="text-secondary">
           <DecryptedHeading client:load />
         </div>
-      
-        <div class="absolute -bottom-6 sm:-bottom-8 left-1/2 text-sm sm:text-xl animate-bounce-slow opacity-75 font-mono text-symbol-300">
+
+        <div
+          class="absolute -bottom-4 sm:-bottom-6 md:-bottom-8 left-1/2 transform -translate-x-1/2 text-xs sm:text-sm md:text-base lg:text-xl animate-bounce-slow opacity-75 font-mono text-symbol-300"
+        >
           ~/
         </div>
       </h1>
     </div>
 
-    <div class="relative">
-      <p class="text-sm sm:text-base lg:text-2xl font-light text-symbol-200 mb-8 max-w-2xl mx-auto leading-relaxed px-4">
+    <div class="relative w-full">
+      <p
+        class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light text-symbol-200 mb-6 sm:mb-8 max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto leading-relaxed px-2 sm:px-4"
+      >
         Principal Software Engineer & Architect of Distinguished Digital Systems
       </p>
-      <div class="font-mono text-xs sm:text-sm text-stone-500 mb-8 h-6">
+      <div
+        class="font-mono text-xs sm:text-sm md:text-base lg:text-lg text-stone-500 mb-6 sm:mb-8 h-6 sm:h-7 md:h-8"
+      >
         <span class="animate-type">$ ./build-extraordinary-systems.sh</span>
         <span class="animate-blink">|</span>
       </div>
     </div>
   </div>
 
-  <div class="absolute bottom-8 animate-bounce-gentle">
-    <button onClick={() => scrollToSection('about')} class="p-2 text-stone-400 hover:text-stone-600 transition-colors duration-300 group">
-      <ChevronDown className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+  <div class="absolute bottom-4 sm:bottom-6 md:bottom-8 animate-bounce-gentle">
+    <button
+      onClick={() => scrollToSection("about")}
+      class="p-2 sm:p-3 text-stone-400 hover:text-stone-600 transition-colors duration-300 group"
+    >
+      <ChevronDown
+        className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 group-hover:scale-110 transition-transform duration-300"
+      />
     </button>
   </div>
 
   <!-- Floating particles -->
   <div class="absolute inset-0 pointer-events-none overflow-hidden">
     <!-- Original particles -->
-    <div class="absolute w-1 h-1 bg-stone-400/30 rounded-full left-[20%] top-[30%]" />
-    <div class="absolute w-1 h-1 bg-stone-400/30 rounded-full left-[65%] top-[60%]" />
-    <div class="absolute w-1 h-1 bg-stone-400/30 rounded-full left-[80%] top-[70%]" />
+    <div
+      class="absolute w-1 h-1 bg-stone-400/30 rounded-full left-[20%] top-[30%]"
+    >
+    </div>
+    <div
+      class="absolute w-1 h-1 bg-stone-400/30 rounded-full left-[65%] top-[60%]"
+    >
+    </div>
+    <div
+      class="absolute w-1 h-1 bg-stone-400/30 rounded-full left-[80%] top-[70%]"
+    >
+    </div>
 
-    <!-- Symbol particles -->
-      <div class="absolute text-md left-[45%] top-[20%] text-base sm:text-lg animate-float opacity-65 font-mono text-symbol-200">
-      <Magnet client:load padding={300} disabled={false} magnetStrength={10}>{"λ"}</Magnet>
+    <!-- Symbol particles with enhanced responsive positioning -->
+    <div
+      class="absolute left-[40%] sm:left-[45%] top-[18%] sm:top-[20%] text-sm sm:text-base md:text-lg lg:text-xl animate-float opacity-65 font-mono text-symbol-200"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >{"λ"}</Magnet
+      >
     </div>
-     <div class="absolute text-md  right-[28%] top-[25%]  font-mono text-symbol-400 text-lg xl:text-2xl  opacity-80">
-      <Magnet client:load padding={300} disabled={false} magnetStrength={10}>{"{}"}</Magnet>
+
+    <div
+      class="absolute right-[25%] sm:right-[28%] top-[23%] sm:top-[25%] font-mono text-symbol-400 text-base sm:text-lg md:text-xl lg:text-2xl opacity-80"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >{"{}"}</Magnet
+      >
     </div>
-    <div class="absolute text-md font-mono   right-[25%] top-[44%] text-base sm:text-lg animate-float opacity-65 text-symbol-200">
-      <Magnet client:load padding={300} disabled={false} magnetStrength={10}>{"∇"}</Magnet>
+
+    <div
+      class="absolute right-[22%] sm:right-[25%] top-[40%] sm:top-[44%] text-sm sm:text-base md:text-lg lg:text-xl font-mono animate-float opacity-65 text-symbol-200"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >{"∇"}</Magnet
+      >
     </div>
-     <div class="absolute text-md font-mono left-[28%] top-[21%] text-symbol-500 text-xl sm:text-2xl opacity-80">
-      <Magnet client:load padding={300} disabled={false} magnetStrength={10}>{"</>"}</Magnet>
+
+    <div
+      class="absolute left-[25%] sm:left-[28%] top-[19%] sm:top-[21%] font-mono text-symbol-500 text-lg sm:text-xl md:text-2xl lg:text-3xl opacity-80"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >{"</>"}</Magnet
+      >
     </div>
-    <div class="absolute text-md font-mono  left-[10%] top-[20%] text-symbol-500">
-      <Magnet client:load padding={300} disabled={false} magnetStrength={10}>||</Magnet>
+
+    <div
+      class="absolute left-[8%] sm:left-[10%] top-[18%] sm:top-[20%] font-mono text-symbol-500 text-sm sm:text-base md:text-lg"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >||</Magnet
+      >
     </div>
-    <div class="absolute text-lg font-mono left-[90%] top-[25%] text-symbol-100">
-      <Magnet client:load padding={300} disabled={false} magnetStrength={10}>{"[]"}</Magnet>
+
+    <div
+      class="absolute left-[85%] sm:left-[90%] top-[23%] sm:top-[25%] text-base sm:text-lg md:text-xl font-mono text-symbol-100"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >{"[]"}</Magnet
+      >
     </div>
-    <div class="absolute text-sm font-mono left-[15%] top-[75%] text-symbol-300">
-      <Magnet client:load padding={300} disabled={false} magnetStrength={10}>π</Magnet>
+
+    <div
+      class="absolute left-[12%] sm:left-[15%] top-[70%] sm:top-[75%] text-xs sm:text-sm md:text-base font-mono text-symbol-300"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >π</Magnet
+      >
     </div>
-    <div class="absolute text-md font-mono left-[85%] top-[80%] text-symbol-200">
-      <Magnet client:load padding={300} disabled={false} magnetStrength={10}>∞</Magnet>
+
+    <div
+      class="absolute left-[80%] sm:left-[85%] top-[75%] sm:top-[80%] text-sm sm:text-base md:text-lg font-mono text-symbol-200"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >∞</Magnet
+      >
     </div>
-    <div class="absolute text-sm font-mono left-[25%] top-[9%] text-symbol-100">
-      <Magnet client:load padding={300} disabled={false} magnetStrength={10}>β</Magnet>
+
+    <div
+      class="absolute left-[22%] sm:left-[25%] top-[7%] sm:top-[9%] text-xs sm:text-sm md:text-base font-mono text-symbol-100"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >β</Magnet
+      >
     </div>
-    <div class="absolute text-md font-mono left-[75%] bottom-[35%] text-symbol-500">
-      <Magnet client:load padding={300} disabled={false} magnetStrength={10}>∫</Magnet>
+
+    <div
+      class="absolute left-[70%] sm:left-[75%] bottom-[30%] sm:bottom-[35%] text-sm sm:text-base md:text-lg font-mono text-symbol-500"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >∫</Magnet
+      >
     </div>
-    <div class="absolute text-sm font-mono  left-[5%] top-[50%] text-symbol-400">
-      <Magnet client:load padding={300} disabled={false} magnetStrength={10}>μ</Magnet>
+
+    <div
+      class="absolute left-[3%] sm:left-[5%] top-[45%] sm:top-[50%] text-xs sm:text-sm md:text-base font-mono text-symbol-400"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >μ</Magnet
+      >
     </div>
-    <div class="absolute text-sm font-mono left-[95%] top-[55%] text-symbol-400">
-      <Magnet client:load padding={300} disabled={false} magnetStrength={10}>δ</Magnet>
+
+    <div
+      class="absolute left-[90%] sm:left-[95%] top-[50%] sm:top-[55%] text-xs sm:text-sm md:text-base font-mono text-symbol-400"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >δ</Magnet
+      >
     </div>
-    <div class="absolute text-sm font-mono right-[65%] top-[76%] text-symbol-400">
-      <Magnet client:load padding={300} disabled={false} magnetStrength={10}>&&</Magnet>
+
+    <div
+      class="absolute right-[60%] sm:right-[65%] top-[70%] sm:top-[76%] text-xs sm:text-sm md:text-base font-mono text-symbol-400"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >&&</Magnet
+      >
     </div>
-    <div class="absolute text-sm font-mono left-[65%] top-[15%] text-symbol-400">
-      <Magnet client:load padding={300} disabled={false} magnetStrength={10}>!=</Magnet>
+
+    <div
+      class="absolute left-[60%] sm:left-[65%] top-[13%] sm:top-[15%] text-xs sm:text-sm md:text-base font-mono text-symbol-400"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >!=</Magnet
+      >
     </div>
-    <div class="absolute text-sm font-mono right-[82%] md:right-[80%] top-[44%] md:top-[48%] text-symbol-400">
-      <Magnet client:load padding={300} disabled={false} magnetStrength={10}>Σ</Magnet>
+
+    <div
+      class="absolute right-[78%] sm:right-[82%] md:right-[80%] top-[40%] sm:top-[44%] md:top-[48%] text-xs sm:text-sm md:text-base font-mono text-symbol-400"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >Σ</Magnet
+      >
+    </div>
+
+    <!-- Additional mobile-hidden particles for larger screens -->
+    <div
+      class="hidden md:block absolute left-[35%] top-[65%] text-sm lg:text-base font-mono text-symbol-300 opacity-50"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >α</Magnet
+      >
+    </div>
+
+    <div
+      class="hidden lg:block absolute right-[15%] top-[35%] text-base xl:text-lg font-mono text-symbol-200 opacity-60"
+    >
+      <Magnet client:load padding={300} disabled={false} magnetStrength={10}
+        >Ω</Magnet
+      >
     </div>
   </div>
 </section>
