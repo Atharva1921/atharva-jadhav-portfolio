@@ -1,6 +1,7 @@
 ---
 // Contact.astro
 import SplitText from "../SplitText";
+const formUrl = import.meta.env.VITE_FORM_URL;
 ---
 
 <section
@@ -171,8 +172,16 @@ import SplitText from "../SplitText";
         </div>
       </div>
 
+      <div
+        id="toast"
+        class="fixed top-5 right-5 bg-green-500 text-white px-4 py-2 rounded shadow-lg opacity-0 transition-opacity duration-300"
+      >
+      </div>
+
       <!-- Contact Form -->
       <form
+        id="contactForm"
+        data-url={formUrl}
         class="space-y-5 sm:space-y-6 bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100"
       >
         <div>
@@ -243,3 +252,39 @@ import SplitText from "../SplitText";
     transform: translateY(-2px);
   }
 </style>
+
+<script type="module">
+  const form = document.getElementById("contactForm");
+  const toast = document.getElementById("toast");
+  const formUrl = form.dataset.url;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch(formUrl, { method: "POST", body: formData });
+      if (res.ok) {
+        showToast("Message sent successfully!");
+        form.reset();
+      } else {
+        showToast("Failed to send message.", true);
+        console.log(await res.text()); 
+      }
+    } catch (err) {
+      console.error(err);
+      showToast("An error occurred.", true);
+    }
+  });
+
+  function showToast(message, isError = false) {
+    toast.textContent = message;
+    toast.className = `fixed top-5 right-5 px-4 py-2 rounded shadow-lg transition-opacity duration-300 ${
+      isError ? "bg-red-500 text-white" : "bg-green-500 text-white"
+    }`;
+    toast.style.opacity = 1;
+    setTimeout(() => {
+      toast.style.opacity = 0;
+    }, 3000);
+  }
+</script>
