@@ -1,124 +1,222 @@
 ---
+// About.astro
 import SplitText from "../SplitText";
 ---
 
 <section
   id="about"
-  class="min-h-screen flex flex-col justify-center items-center relative px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-primary-2 py-8 sm:py-12 md:py-16"
+  class="min-h-screen flex flex-col justify-center items-center relative px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-20 sm:py-24 md:py-32 bg-primary-2"
 >
-  <div class="w-full max-w-7xl mx-auto">
-    <div
-      class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-20 xl:gap-24 items-center"
-    >
-      <!-- Content Section -->
-      <div class="order-2 lg:order-1">
-        <div class="mb-6 sm:mb-8 md:mb-10 lg:mb-12">
-          <SplitText
-            client:visible
-            text="About Me"
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold text-center lg:text-left"
-            delay={100}
-            duration={2}
-            ease="elastic.out(1,0.3)"
-            splitType="chars"
-            from={{ opacity: 0, y: 40 }}
-            to={{ opacity: 1, y: 0 }}
-            threshold={0.1}
-            rootMargin="-10px"
-            splitType="lines"
-            textAlign="left"
-          />
-        </div>
+  <div class="max-w-4xl w-full">
+    <!-- Section Header -->
+    <div class="mb-12 sm:mb-16 md:mb-20">
+      <SplitText
+        client:visible
+        text="About Me"
+        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold"
+        delay={100}
+        duration={2}
+        ease="elastic.out(1,0.3)"
+        splitType="chars"
+        from={{ opacity: 0, y: 40 }}
+        to={{ opacity: 1, y: 0 }}
+        threshold={0.1}
+        rootMargin="-10px"
+      />
 
-        <div
-          class="space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-7 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-stone-700 max-w-none lg:max-w-2xl"
-        >
-          <p class="text-center lg:text-left">
-            With fifteen years cultivating enterprise-grade software systems, I
-            specialize in architecting scalable solutions that marry
-            computational excellence with refined user experience.
-          </p>
-          <p class="text-center lg:text-left">
-            My practice focuses on distributed systems, advanced algorithms, and
-            performance optimization—bringing the precision of classical
-            engineering principles to modern software architecture.
-          </p>
-          <p class="text-center lg:text-left">
-            I collaborate exclusively with forward-thinking organizations that
-            understand the value of thoughtful engineering and appreciate the
-            distinction between merely functional code and truly elegant
-            systems.
-          </p>
-        </div>
-      </div>
+      <!-- Decorative line -->
+      <div class="w-20 sm:w-24 md:w-32 h-1 bg-gray-900 mt-6 sm:mt-8"></div>
+    </div>
 
-      <!-- Visual Section -->
-      <div
-        class="order-1 lg:order-2 relative w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-none mx-auto lg:mx-0"
+    <!-- Content -->
+    <div class="space-y-6 sm:space-y-8 md:space-y-10">
+      <p
+        class="text-lg sm:text-xl md:text-2xl lg:text-3xl leading-relaxed text-gray-800 font-light"
       >
-        <div class="relative group">
-          <div
-            class="aspect-square bg-stone-200 rounded-sm overflow-hidden group-hover:shadow-2xl transition-all duration-500 transform group-hover:scale-105"
-          >
-            <div
-              class="w-full h-full bg-gradient-to-br from-stone-800 to-stone-900 flex items-center justify-center text-stone-100 relative"
-            >
-              <div class="text-center">
-                <div
-                  class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-mono mb-2 sm:mb-3 md:mb-4"
-                >
-                  ~/
-                </div>
-                <div
-                  class="text-xs sm:text-sm md:text-base tracking-widest opacity-75"
-                >
-                  SYSTEMS
-                </div>
-              </div>
+        With fifteen years cultivating enterprise-grade software systems, I
+        specialize in architecting scalable solutions that marry computational
+        excellence with refined user experience.
+      </p>
 
-              <!-- Subtle floating elements for larger screens -->
-              <div class="absolute inset-0 pointer-events-none">
-                <div
-                  class="hidden sm:block absolute top-4 left-4 w-1 h-1 bg-stone-400/30 rounded-full animate-pulse"
-                >
-                </div>
-                <div
-                  class="hidden sm:block absolute bottom-4 right-4 w-1 h-1 bg-stone-400/30 rounded-full animate-pulse"
-                  style="animation-delay: 1s;"
-                >
-                </div>
-                <div
-                  class="hidden md:block absolute top-1/2 left-4 w-0.5 h-0.5 bg-stone-400/20 rounded-full animate-pulse"
-                  style="animation-delay: 2s;"
-                >
-                </div>
-                <div
-                  class="hidden md:block absolute top-4 right-1/2 w-0.5 h-0.5 bg-stone-400/20 rounded-full animate-pulse"
-                  style="animation-delay: 3s;"
-                >
-                </div>
-              </div>
-            </div>
-          </div>
+      <p
+        class="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-gray-600 font-light"
+      >
+        My practice focuses on distributed systems, advanced algorithms, and
+        performance optimization—bringing the precision of classical engineering
+        principles to modern software architecture.
+      </p>
 
-          <!-- Decorative corner elements for larger screens -->
+      <p
+        class="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-gray-600 font-light"
+      >
+        I collaborate exclusively with forward-thinking organizations that
+        understand the value of thoughtful engineering and appreciate the
+        distinction between merely functional code and truly elegant systems.
+      </p>
+    </div>
+
+    <!-- Skills/Expertise Section -->
+    <div class="mt-16 sm:mt-20 md:mt-24">
+      <h3
+        class="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-12 sm:mb-16"
+      >
+        Core Expertise
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <div
+          class="group relative bg-white/50 backdrop-blur-sm border border-gray-200 p-6 sm:p-8 hover:border-gray-900 hover:shadow-lg transition-all duration-300"
+        >
           <div
-            class="hidden lg:block absolute -top-2 -left-2 w-4 h-4 border-l-2 border-t-2 border-stone-400/30"
+            class="absolute top-6 sm:top-8 right-6 sm:right-8 text-4xl sm:text-5xl font-bold text-gray-200 group-hover:text-gray-300 transition-colors duration-300"
           >
+            01
           </div>
-          <div
-            class="hidden lg:block absolute -bottom-2 -right-2 w-4 h-4 border-r-2 border-b-2 border-stone-400/30"
+          <h4
+            class="text-xl sm:text-2xl font-semibold text-gray-900 mb-3 sm:mb-4 relative z-10"
           >
-          </div>
+            System Architecture
+          </h4>
+          <p
+            class="text-sm sm:text-base text-gray-600 leading-relaxed relative z-10"
+          >
+            Designing scalable, maintainable distributed systems that stand the
+            test of time and traffic
+          </p>
         </div>
 
-        <!-- Background decoration for larger screens -->
         <div
-          class="hidden xl:block absolute -inset-4 bg-gradient-to-br from-stone-300/10 to-transparent rounded-lg -z-10"
+          class="group relative bg-white/50 backdrop-blur-sm border border-gray-200 p-6 sm:p-8 hover:border-gray-900 hover:shadow-lg transition-all duration-300"
         >
+          <div
+            class="absolute top-6 sm:top-8 right-6 sm:right-8 text-4xl sm:text-5xl font-bold text-gray-200 group-hover:text-gray-300 transition-colors duration-300"
+          >
+            02
+          </div>
+          <h4
+            class="text-xl sm:text-2xl font-semibold text-gray-900 mb-3 sm:mb-4 relative z-10"
+          >
+            Performance Optimization
+          </h4>
+          <p
+            class="text-sm sm:text-base text-gray-600 leading-relaxed relative z-10"
+          >
+            Fine-tuning systems for maximum efficiency through profiling,
+            analysis, and strategic improvements
+          </p>
+        </div>
+
+        <div
+          class="group relative bg-white/50 backdrop-blur-sm border border-gray-200 p-6 sm:p-8 hover:border-gray-900 hover:shadow-lg transition-all duration-300"
+        >
+          <div
+            class="absolute top-6 sm:top-8 right-6 sm:right-8 text-4xl sm:text-5xl font-bold text-gray-200 group-hover:text-gray-300 transition-colors duration-300"
+          >
+            03
+          </div>
+          <h4
+            class="text-xl sm:text-2xl font-semibold text-gray-900 mb-3 sm:mb-4 relative z-10"
+          >
+            User Experience
+          </h4>
+          <p
+            class="text-sm sm:text-base text-gray-600 leading-relaxed relative z-10"
+          >
+            Crafting intuitive interfaces that delight users while maintaining
+            peak performance
+          </p>
+        </div>
+
+        <div
+          class="group relative bg-white/50 backdrop-blur-sm border border-gray-200 p-6 sm:p-8 hover:border-gray-900 hover:shadow-lg transition-all duration-300"
+        >
+          <div
+            class="absolute top-6 sm:top-8 right-6 sm:right-8 text-4xl sm:text-5xl font-bold text-gray-200 group-hover:text-gray-300 transition-colors duration-300"
+          >
+            04
+          </div>
+          <h4
+            class="text-xl sm:text-2xl font-semibold text-gray-900 mb-3 sm:mb-4 relative z-10"
+          >
+            Advanced Algorithms
+          </h4>
+          <p
+            class="text-sm sm:text-base text-gray-600 leading-relaxed relative z-10"
+          >
+            Implementing efficient computational solutions backed by solid
+            computer science fundamentals
+          </p>
+        </div>
+
+        <div
+          class="group relative bg-white/50 backdrop-blur-sm border border-gray-200 p-6 sm:p-8 hover:border-gray-900 hover:shadow-lg transition-all duration-300"
+        >
+          <div
+            class="absolute top-6 sm:top-8 right-6 sm:right-8 text-4xl sm:text-5xl font-bold text-gray-200 group-hover:text-gray-300 transition-colors duration-300"
+          >
+            05
+          </div>
+          <h4
+            class="text-xl sm:text-2xl font-semibold text-gray-900 mb-3 sm:mb-4 relative z-10"
+          >
+            Code Quality
+          </h4>
+          <p
+            class="text-sm sm:text-base text-gray-600 leading-relaxed relative z-10"
+          >
+            Writing elegant, maintainable codebases with comprehensive testing
+            and documentation
+          </p>
+        </div>
+
+        <div
+          class="group relative bg-white/50 backdrop-blur-sm border border-gray-200 p-6 sm:p-8 hover:border-gray-900 hover:shadow-lg transition-all duration-300"
+        >
+          <div
+            class="absolute top-6 sm:top-8 right-6 sm:right-8 text-4xl sm:text-5xl font-bold text-gray-200 group-hover:text-gray-300 transition-colors duration-300"
+          >
+            06
+          </div>
+          <h4
+            class="text-xl sm:text-2xl font-semibold text-gray-900 mb-3 sm:mb-4 relative z-10"
+          >
+            Team Leadership
+          </h4>
+          <p
+            class="text-sm sm:text-base text-gray-600 leading-relaxed relative z-10"
+          >
+            Guiding teams toward technical excellence through mentorship and
+            best practices
+          </p>
         </div>
       </div>
     </div>
 
+    <!-- Call to Action -->
+    <div
+      class="mt-16 sm:mt-20 md:mt-24 pt-12 sm:pt-16 border-t border-gray-300"
+    >
+      <p class="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8">
+        Interested in collaborating? Let's build something exceptional together.
+      </p>
+      <a
+        href="#contact"
+        class="inline-flex items-center gap-2 text-gray-900 font-medium text-lg hover:gap-4 transition-all duration-300 group"
+      >
+        <span>Get in touch</span>
+        <svg
+          class="w-5 h-5 transition-transform group-hover:translate-x-1"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
+      </a>
+    </div>
   </div>
 </section>

@@ -1,8 +1,8 @@
 ---
 // Blog.astro
 import Parser from "rss-parser";
-import BlogContainer from "../BlogContainer";
 import SplitText from "../SplitText";
+import StickyScrollArticles from "../sticky-scroll-reveal";
 
 const parser = new Parser();
 const feed = await parser.parseURL("https://medium.com/feed/@atharvajadhav10");
@@ -15,8 +15,7 @@ function estimateReadingTime(content: string) {
   return `${readingTime} min read`;
 }
 
-// Function to extract excerpt from content
-function extractExcerpt(content: string, maxLength = 150) {
+function extractExcerpt(content: string, maxLength = 200) {
   const text = content.replace(/<[^>]*>/g, "").trim();
   return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
 }
@@ -45,41 +44,56 @@ export function extractThumbnail(content: string): string | null {
 }
 
 const categoryColors = [
-  "from-blue-500/20 to-purple-600/20",
-  "from-green-500/20 to-teal-600/20",
-  "from-orange-500/20 to-red-600/20",
-  "from-purple-500/20 to-pink-600/20",
-  "from-indigo-500/20 to-blue-600/20",
-  "from-emerald-500/20 to-cyan-600/20",
-  "from-gray-500/20 to-slate-600/20",
+  "from-blue-500 to-purple-600",
+  "from-green-500 to-teal-600",
+  "from-orange-500 to-red-600",
+  "from-purple-500 to-pink-600",
+  "from-indigo-500 to-blue-600",
+  "from-emerald-500 to-cyan-600",
+  "from-rose-500 to-orange-600",
 ];
 
-const articles = feed.items.slice(0, 6).map((item) => ({
-  title: item.title,
-  link: item.link,
-  category: extractCategory(item.categories),
-  publishDate: formatDate(item.pubDate),
-  categories: item.categories,
-  content: item["content:encoded"],
-  thumbnail: extractThumbnail(item["content:encoded"]),
-  colorScheme:
-    categoryColors[Math.floor(Math.random() * categoryColors.length)],
-  excerpt: extractExcerpt(item["content:encoded"]),
-  readingTime: estimateReadingTime(item["content:encoded"]),
-}));
+// Transform articles for StickyScroll component
+const stickyContent = feed.items.slice(0, 6).map((item, index) => {
+  const thumbnail = extractThumbnail(item["content:encoded"]);
+  const category = extractCategory(item.categories);
+  const publishDate = formatDate(item.pubDate);
+  const readingTime = estimateReadingTime(item["content:encoded"]);
+  const excerpt = extractExcerpt(item["content:encoded"]);
+  const colorScheme = categoryColors[index % categoryColors.length];
+
+  return {
+    title: item.title || "Untitled Article",
+    description: excerpt,
+    content: thumbnail,
+    link: item.link,
+    category: category,
+    publishDate: publishDate,
+    readingTime: readingTime,
+    thumbnail: thumbnail,
+    colorScheme: colorScheme,
+  };
+});
 ---
 
 <section
   id="articles"
-  class="min-h-screen flex flex-col justify-center items-center relative px-4 md:px-8 bg-primary-2"
+  class="min-h-screen flex flex-col justify-center relative px-6 sm:px-8 md:px-12 lg:px-16 py-32 bg-primary-2"
 >
   <div class="max-w-7xl mx-auto w-full">
     <!-- Section Header -->
-    <div class="text-center">
+    <div class="mb-24">
+      <div class="flex items-center gap-4 mb-8">
+        <div class="w-12 h-0.5 bg-gray-900"></div>
+        <span class="text-sm font-mono text-gray-500 uppercase tracking-wider"
+          >Featured Writing</span
+        >
+      </div>
+
       <SplitText
         client:visible
         text="Latest Articles"
-        className="text-6xl font-semibold text-center"
+        className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8"
         delay={100}
         duration={2}
         ease="elastic.out(1,0.3)"
@@ -88,44 +102,70 @@ const articles = feed.items.slice(0, 6).map((item) => ({
         to={{ opacity: 1, y: 0 }}
         threshold={0.1}
         rootMargin="-10px"
-        splitType="lines"
-        textAlign="left"
       />
-      <div class="w-12 h-px bg-gray-400 mx-auto mb-6"></div>
-      <p
-        class="text-gray-600 text-lg font-light max-w-xl mx-auto leading-relaxed"
-      >
-        Thoughts and insights on technology, development, and design
-      </p>
+
+      <div class="flex items-start gap-8">
+        <div
+          class="hidden md:block w-1 h-24 bg-gradient-to-b from-gray-900 to-transparent"
+        >
+        </div>
+        <p
+          class="text-gray-600 text-lg md:text-xl font-light max-w-2xl leading-relaxed"
+        >
+          Exploring the intersection of technology, development, and design
+          through in-depth articles and technical insights.
+        </p>
+      </div>
     </div>
 
-    <BlogContainer articles={articles} client:visible />
+    <!-- Sticky Scroll Articles -->
+    <div class="relative">
+      <div
+        class="absolute -left-8 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent hidden xl:block"
+      >
+      </div>
+      <StickyScrollArticles content={stickyContent} client:visible />
+    </div>
 
     <!-- View All Articles -->
-    <div class="text-center">
-      <p class="text-gray-500 text-sm font-light tracking-wide uppercase mb-4">
-        More insights available
-      </p>
-      <a
-        href="https://medium.com/@atharvajadhav10"
-        target="_blank"
-        class="inline-flex items-center px-8 py-3 border border-gray-900 text-gray-900 font-medium tracking-wide hover:bg-gray-900 hover:text-white transition-all duration-300"
+    <div class="mt-32 pt-16 border-t border-gray-300">
+      <div
+        class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
       >
-        View all articles on Medium
-        <svg
-          class="w-4 h-4 ml-2"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+        <div>
+          <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+            Want to read more?
+          </h3>
+          <p class="text-gray-600 text-base md:text-lg">
+            Discover all articles and insights on Medium
+          </p>
+        </div>
+
+        <a
+          href="https://medium.com/@atharvajadhav10"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group relative inline-flex items-center gap-3 px-10 py-5 bg-gray-900 text-white font-medium text-lg overflow-hidden transition-all duration-300 hover:gap-5"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-          ></path>
-        </svg>
-      </a>
+          <span class="relative z-10">View all articles</span>
+          <svg
+            class="w-5 h-5 relative z-10 transition-transform group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-900 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"
+          >
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </section>
